@@ -10,11 +10,14 @@ public class ProjectileDetection : MonoBehaviour
     private bool targetHit;
     public GameObject objectToDestroy;
 
-
+    AudioSource audioSource;
+    public AudioClip breaking;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
+
     }
     private void OnCollisionEnter(Collision collision) 
     {
@@ -28,6 +31,7 @@ public class ProjectileDetection : MonoBehaviour
         GameObject bottle = transform.GetChild(0).gameObject;
         ParticleSystem ps = bottle.GetComponent<ParticleSystem>();
         ps.Play();
+        audioSource.PlayOneShot(breaking);
         //Destroy(gameObject);
 
         //turn off bottle mesh
@@ -46,5 +50,6 @@ public class ProjectileDetection : MonoBehaviour
         rb.isKinematic = true;
 
         transform.SetParent(collision.transform);
+
     }
 }

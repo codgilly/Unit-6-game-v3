@@ -20,13 +20,19 @@ public class BottleThrowing : MonoBehaviour
 
     bool readyToThrow;
 
+    AudioSource audioSource;
+    public AudioClip throwing;
+
     private void Start()
     {
         readyToThrow = true;
+        audioSource = GetComponent<AudioSource>();
+        print("audio source=" + audioSource);
     }
 
     private void Throw()
     {
+
         readyToThrow = false;
 
         GameObject projectile = Instantiate(objectToThrow, attackPoint.position, cam.rotation);
@@ -49,6 +55,11 @@ public class BottleThrowing : MonoBehaviour
         totalThrows--;
 
         Invoke(nameof(ResetThrow), throwCooldown);
+    }
+
+    void PlaySoundEffect()
+    {
+        audioSource.PlayOneShot(throwing);
     }
 
     private void ResetThrow()

@@ -30,6 +30,9 @@ namespace PlayerMov
 
         private bool targetHit;
 
+        AudioSource audioSource;
+        public AudioClip drunkWalking;
+
 
         void Start()
         {
@@ -37,6 +40,11 @@ namespace PlayerMov
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             anim = GetComponent<Animator>();
+            audioSource = GetComponent<AudioSource>();
+        }
+        void steps()
+        {
+            audioSource.PlayOneShot(drunkWalking);
         }
         void Drinking()
         {
