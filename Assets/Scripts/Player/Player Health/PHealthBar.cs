@@ -55,6 +55,7 @@ public class PHealthBar : MonoBehaviour
         if (health <= 0)
         {
             anim.SetTrigger("die");
+            FindObjectOfType<audioManager>().Play("male_hurt7-48124");
             Invoke("DoAction", 2.0f);
             deathSceneStarted = true;
         }
